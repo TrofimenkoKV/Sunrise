@@ -18,7 +18,7 @@ namespace Sunrise.Database.Model
         [Column("id")]
         public int Id {get;set;}
         
-        [Index("city_name_UNIQUE", IsUnique=true)]
+        [Index("city_name_unique", IsUnique=true)]
         [Column("city_name")]
         [Required]
         public string CityName { get; set; }

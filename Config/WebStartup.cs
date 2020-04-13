@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sunrise.Config
 {
@@ -19,6 +19,7 @@ namespace Sunrise.Config
         {
             services.AddControllers();
             services.AddMvc().AddNewtonsoftJson();
+            services.AddDbContext<DaoContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -34,6 +35,13 @@ namespace Sunrise.Config
             {
                 endpoints.MapControllers();
             });
+
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetService<DaoContext>().Database.Migrate();
+            }
+
         }
+        
     }
 }

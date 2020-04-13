@@ -11,7 +11,7 @@ namespace Sunrise.Config
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string config = "server=localhost;port=3306;database=dotnet;user=root;password=password;";
-            optionsBuilder.UseMySQL(config);
+            optionsBuilder.UseMySql(config);
         }
 
     }
