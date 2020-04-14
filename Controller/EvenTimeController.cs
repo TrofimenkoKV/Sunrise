@@ -10,7 +10,12 @@ namespace Sunrise.Controller
     public class EventTimeController : ControllerBase
     {
 
-        private EventTimeService eventTimeService = new EventTimeService();
+        private EventTimeService eventTimeService;
+
+        public EventTimeController(EventTimeService eventTimeService) 
+        {
+            this.eventTimeService = eventTimeService;
+        }
 
         [HttpGet("{cityName}")]
         public SunriseSunsetDto GetEventTime(string cityName, [FromQuery(Name = "event_time")] EventTime eventTime = EventTime.All) 

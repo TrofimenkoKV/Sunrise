@@ -9,7 +9,12 @@ namespace Sunrise.Service
 {
     public class CityService
     {
-        private CityDao cityDao = new CityDao();
+        private CityDao cityDao;
+
+        public CityService(CityDao cityDao) 
+        {
+            this.cityDao = cityDao;
+        }
 
         public List<CityDto> getAllSupportedCitites() 
         {

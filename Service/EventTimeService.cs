@@ -12,9 +12,14 @@ namespace Sunrise.Service
 {
     public class EventTimeService
     {
-        private CityDao cityDao = new CityDao();
+        private CityDao cityDao;
+        private SunriseSunsetHttpDao sunriseSunsetHttpDao;
 
-        private SunriseSunsetHttpDao sunriseSunsetHttpDao = new SunriseSunsetHttpDao();
+        public EventTimeService(CityDao cityDao, SunriseSunsetHttpDao sunriseSunsetHttpDao) 
+        {
+            this.cityDao = cityDao;
+            this.sunriseSunsetHttpDao = sunriseSunsetHttpDao;
+        }
 
         public SunriseSunsetDto GetSunriseSunsetByCityName (String cityName, EventTime eventTime) {
             
