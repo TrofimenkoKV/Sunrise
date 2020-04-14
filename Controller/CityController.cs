@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Sunrise.Controller.Dto;
@@ -10,7 +9,11 @@ namespace Sunrise.Controller
     [Route("api/cities")]
     public class CityController : ControllerBase
     {
-        private CityService cityService = new CityService();
+        private CityService cityService;
+
+        public CityController(CityService cityService) {
+            this.cityService = cityService;
+        }
         
         [HttpGet]
         public List<CityDto> GetSupportedCities() 
