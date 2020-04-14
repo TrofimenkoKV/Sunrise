@@ -5,7 +5,7 @@ using Sunrise.Api.Dao;
 
 namespace Sunrise.Config
 {
-    public class IoCModule : Module
+    public class ContainerModule : Module
     {
         protected override void Load(ContainerBuilder builder) 
         {

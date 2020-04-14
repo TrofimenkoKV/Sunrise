@@ -27,7 +27,7 @@ namespace Sunrise.Config
             services.AddAutofac();
 
             var builder = new ContainerBuilder();   
-            builder.RegisterModule<IoCModule>();
+            builder.RegisterModule<ContainerModule>();
             builder.Populate(services);
             var container = builder.Build();
 
