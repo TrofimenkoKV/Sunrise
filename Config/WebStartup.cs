@@ -25,6 +25,7 @@ namespace Sunrise.Config
             services.AddMvc().AddNewtonsoftJson();
             services.AddDbContext<DaoContext>();
             services.AddAutofac();
+            services.AddLogging();
 
             var builder = new ContainerBuilder();   
             builder.RegisterModule<ContainerModule>();

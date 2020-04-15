@@ -7,6 +7,7 @@ using Sunrise.Controller.Dto;
 
 using Sunrise.Api.Model;
 using Sunrise.Api.Dao;
+using Microsoft.Extensions.Logging;
 
 namespace Sunrise.Service
 {
@@ -14,15 +15,19 @@ namespace Sunrise.Service
     {
         private CityDao cityDao;
         private SunriseSunsetHttpDao sunriseSunsetHttpDao;
+        private ILogger logger;
 
-        public EventTimeService(CityDao cityDao, SunriseSunsetHttpDao sunriseSunsetHttpDao) 
+        public EventTimeService(CityDao cityDao, SunriseSunsetHttpDao sunriseSunsetHttpDao, ILogger<EventTimeService> logger) 
         {
             this.cityDao = cityDao;
             this.sunriseSunsetHttpDao = sunriseSunsetHttpDao;
+            this.logger = logger;
         }
 
         public SunriseSunsetDto GetSunriseSunsetByCityName (String cityName, EventTime eventTime) {
             
+            logger.LogDebug("Starting search EventTime {} for city {}", eventTime, cityName);
+
             City city = cityDao.GetCityByName(cityName);
             if(city == null)
                 throw new Exception(String.Format("Could not find city: {0} in database ", cityName));
@@ -30,6 +35,8 @@ namespace Sunrise.Service
             SunriseSunset sunriseSunset = sunriseSunsetHttpDao.GetDayDataByLongitudeAndLatitude(city.Longitude, city.Latitude);
             if (sunriseSunset == null)
                 throw new ArgumentNullException(String.Format("Could not find Sunrise and Sunset for city {0} ", city));
+            
+            logger.LogDebug("EventTime found for city {}", sunriseSunset);
 
             return transformToSunriseSunsetDto(eventTime, city.CityName, sunriseSunset.Sunrise, sunriseSunset.Sunset);
         }
