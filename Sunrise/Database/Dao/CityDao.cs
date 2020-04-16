@@ -26,14 +26,14 @@ namespace Sunrise.Database.Dao
             context.SaveChanges();
         }
 
-        public City GetCityByName(string cityName) 
+        public virtual City GetCityByName(string cityName) 
         {
             var query = from c in context.Cities where c.CityName == cityName select c;
             var city = query.FirstOrDefault<City>();
             return city;
         }
 
-        public List<City> GetAll() 
+        public virtual List<City> GetAll() 
         {
             var query = from c in context.Cities select c;
             return query.ToList();
