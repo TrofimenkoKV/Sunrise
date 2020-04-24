@@ -21,6 +21,7 @@ namespace Sunrise.Config
             builder.RegisterInstance(new LoggerFactory()).As<ILoggerFactory>();
             builder.RegisterGeneric(typeof(Logger<>)).As(typeof(ILogger<>)).SingleInstance();
 
+            builder.RegisterType<SecurityService>().AsSelf().SingleInstance();
         }
     }
 }

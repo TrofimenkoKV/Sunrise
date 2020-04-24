@@ -10,7 +10,18 @@ Mysql need to be installed;
 
 App Endpoints:
 
-For city info:
+To get token:
+        https://localhost:5001/api/token/
+
+        Supports POST method;
+
+        Expected body for POST:
+        {
+	   "password": "12534",
+	   "user_name": "tllkihuest"
+        }
+
+For city info (token needed for requesting this endpoint):
         https://localhost:5001/api/cities
 
         Supports GET and POST methods;

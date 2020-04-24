@@ -10,6 +10,7 @@ namespace Sunrise.Api.Dao
 
         private static readonly string API_ADDRESS = "https://api.sunrise-sunset.org/json";
         private static readonly HttpClient httpClient = new HttpClient(); 
+        
         public virtual SunriseSunset GetDayDataByLongitudeAndLatitude (double longitude, double latitude) {
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Add("User-Agent", "I'm awesome agent");
